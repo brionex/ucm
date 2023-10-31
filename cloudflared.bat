@@ -1,5 +1,11 @@
 @echo off
-setlocal
-set ARG=%1
-"L:\programming\Scripts\cloudflared\cloudflared.exe" tunnel --url %ARG%
-endlocal
+
+if "%~1" == "" (
+  echo !Debes ingresar una url valida.
+  echo.
+  goto end
+)
+
+"L:\programming\Scripts\programs\cloudflared\cloudflared.exe" tunnel --url %~1
+
+:end

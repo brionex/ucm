@@ -1,23 +1,45 @@
 @echo off
-set "outputPath=%CD%\eslintrc.json"
-echo.
+set "filename=eslintrc.json"
+set "origin=L:\programming\Scripts\programs\eslintconfig\%filename%"
 
-rem Verificar si el archivo ya existe antes de crearlo
-if not exist "%outputPath%" (
-  (
-  echo {
-  echo   "extends": ["standard", "standard-jsx"],
-  echo   "rules": {
-  echo     "space-before-function-paren": "off",
-  echo     "no-trailing-spaces": ["error", { "skipBlankLines": true }],
-  echo     "no-multiple-empty-lines": ["error", { "max": 3, "maxEOF": 1 }],
-  echo     "comma-dangle": ["error", "only-multiline"]
-  echo   }
-  echo }
-  ) > "%outputPath%"
-  echo Archivo eslintrc.json generado en: %outputPath%
-) else (
-  echo El archivo eslintrc.json ya existe en: %outputPath%
+:: Comprobar si se proporciona el argumento "-d"
+if "%~1" == "-d" goto DeleteFile
+if not "%~1" == "" (
+  echo Subcomando no valido.
+  goto end
 )
 
+:: Verificar si el archivo ya existe antes de crearlo
+if exist "%filename%" goto FileExists
+if exist "%origin%" goto CopyFile
+
+:DeleteFile
+if exist "%filename%" (
+  del "%filename%" 2>nul
+  if not exist "%filename%" (
+    echo El archivo %filename% ha sido eliminado.
+  ) else (
+    echo Error al eliminar el archivo %filename%.
+  )
+) else (
+  echo El archivo %filename% no existe en la ruta actual.
+)
+goto end
+
+:FileExists
+echo El archivo %filename% ya existe en la ruta actual:
+echo %CD%\%filename%
+goto end
+
+:CopyFile
+copy "%origin%" "%CD%" > nul
+if exist "%filename%" (
+  echo Archivo %filename% generado en:
+  echo %CD%\%filename%
+) else (
+  echo Error al generar el archivo %filename%.
+)
+goto end
+
+:end
 echo.
