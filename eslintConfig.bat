@@ -1,6 +1,7 @@
 @echo off
+set "DIRNAME=%~dp0"
 set "filename=eslintrc.json"
-set "origin=L:\programming\Scripts\programs\eslintconfig\%filename%"
+set "origin=%DIRNAME%data\eslintconfig\%filename%"
 
 :: Comprobar si se proporciona el argumento "-d"
 if "%~1" == "-d" goto DeleteFile

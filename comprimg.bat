@@ -8,6 +8,7 @@
 
 setlocal enabledelayedexpansion
 
+set "DIRNAME=%~dp0"
 set command=python "L:\programming\Scripts\programs-scripts\image-compressor.py" %CD%
 set p1=%~1
 set p2=%~2

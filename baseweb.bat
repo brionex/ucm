@@ -1,7 +1,9 @@
 @echo off
 setlocal enabledelayedexpansion
 
-set "template=L:\programming\Scripts\programs\baseweb\template"
+set "DIRNAME=%~dp0"
+set "template=%DIRNAME%data\baseweb\template"
+
 
 :: Verifica si debe crear carpeta por defecto o por argumneto.
 if not "%~1" == "" (
