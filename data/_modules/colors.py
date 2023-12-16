@@ -1,5 +1,5 @@
 class C:
-    RESET = '\033[0m'
+    R = '\033[0m' # Reset
     RED = '\033[91m'
     GREEN = '\033[92m'
     YELLOW = '\033[93m'
