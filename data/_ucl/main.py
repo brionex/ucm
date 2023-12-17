@@ -1,6 +1,7 @@
 import sys
 import os
 
+
 sys.path.append(os.path.join(sys.argv[1], 'data'))
 from _modules.colors import C
 
