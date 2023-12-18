@@ -1,4 +1,4 @@
-:: 
+:: Doc
 
 @echo off
 setlocal enabledelayedexpansion
@@ -14,7 +14,7 @@ if not "%~1" == "" (
   set "folder=baseweb"
 )
 
-:: Crea la carpe si no existe.
+:: Crea la carpeta si no existe.
 if not exist "%folder%" (
   mkdir "%folder%" 2>nul
   if exist "%folder%" (
