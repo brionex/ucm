@@ -6,6 +6,6 @@
 
 set "base=%~dp0"
 set "venv=%base%data\_venv\Scripts\python.exe"
-set "file=%base%data\_ucl\main.py
+set "file=%base%data\_ucl\ucl.py
 
-%venv% %file% %base% ucl %~1 %~2
+%venv% %file% %base% %~1 %~2
