@@ -1,6 +1,6 @@
 import sys
 import os
-from _modules.colors import C
+from colors import Colors
 
 N_ARGS = len(sys.argv)
 BASE = sys.argv[1]  # Ruta donde están ubicados los scripts.
@@ -14,13 +14,13 @@ file_list = os.listdir(BASE)
 
 
 # Clase que contiene las constantes utilizadas en el programa
-class CONST:
-    title = f'{C.CYAN}\nLista de comandos del Usuario.{C.R}'
-    info = f'\n{C.CYAN}Para mas información sobre un comando.{C.R}\n - ucl <command>\n'
-    command_doc = f'\nDocumentación del comando: {C.CYAN}{ARG_COMMAND}{C.R}\n'
-    not_doc = f'\n* No hay documentación del comando: {C.CYAN}{ARG_COMMAND}{C.R}\n'
-    args_error = f'\n* {C.RED}Argumentos proporcionados no válidos.{C.R}\n'
-    not_exist = f'\n* {C.RED}El comando especificado no existe {C.R}\n'
+class CONST(Colors):
+    title = f'/cyan/\nLista de comandos del /cafe/Usuario/r/.'
+    info = f'/cyan/\nPara ver documentación de un comando./r/\n - ucl <command>\n'
+    command_doc = f'\nDocumentación del comando: /cyan/{ARG_COMMAND}\n'
+    not_doc = f'\n* No hay documentación del comando: /cyan/{ARG_COMMAND}\n'
+    args_error = f'\n*/red/ Argumentos ingresados no válidos.\n'
+    not_exist = f'\n*/red/ El comando especificado no existe.\n'
 
 
 # Función para mostrar la lista de comandos disponibles
@@ -49,8 +49,14 @@ def show_info():
     # Abre el archivo y lee las líneas que comienzan con '::' para obtener la documentación
     with open(path_file, 'r') as file:
         lines = file.readlines()
-        doc = [line.strip().replace('::', ' *')
-               for line in lines if line.strip().startswith('::')]
+
+        doc = []
+        for line in lines:
+            if line.strip().startswith(':::'):
+                doc.append(line.strip().replace(':::', ' '))
+            
+            elif line.strip().startswith('::'):
+                doc.append(line.strip().replace('::', '*'))
 
         # Muestra la documentación si existe, de lo contrario, muestra un mensaje
         if doc:

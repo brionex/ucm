@@ -1,5 +1,8 @@
 {
   "cSpell.words": [
     "endev"
+  ],
+  "python.analysis.extraPaths": [
+    "./data/_modules"
   ]
 }
