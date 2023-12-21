@@ -1,15 +1,26 @@
+@REM Documentacion.
+:: Borra el historial de comandos ingresados en la consola.
+
+
+
 @echo off
 
-set "archivo=C:\Users\leonel\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt"
+set "archivo=%AppData%\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt"
 
-if "%1" == "-show" (
+if "%~1" == "-show" (
+    echo.
     type "%archivo%"
+    echo.
     exit /b
 )
 
 if exist "%archivo%" (
     del "%archivo%"
-    echo El archivo fue eliminado exitosamente.
+    echo.
+    echo * El archivo fue eliminado exitosamente.
+    echo.
 ) else (
-    echo El archivo no existe.
+    echo.
+    echo * El archivo no existe.
+    echo.
 )
