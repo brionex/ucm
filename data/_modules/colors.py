@@ -1,35 +1,87 @@
 class Colors:
 
     colors = {
-        'r': '#ffffff',   # reset
+        'r': '\033[0m',   # reset
         'red': '#E74856',
         'green': '#00ff00',
         'yellow': '#ffff00',
         'blue': '#0000ff',
         'magenta': '#ff00ff',
         'cyan': '#00ffff',
-        'cafe': '#6D4D27'
+        'cafe': '#6D4D27',
+        'black': '#000',
+        'white': '#fff'
     }
 
+    first_instance = True
+
+
+
+    def __new__(cls, *args):
+        # Cambia los colores de hexadecimal a ANSI en la primera instancia.
+        if Colors.first_instance:
+            cls.process_color()
+            Colors.first_instance = False
+
+        data = args[0]
+        if type(data) is str:
+            return cls.format(data)
+        
+        elif type(data) is dict:
+            cls.format_dict(data)
+        
+        elif type(data) is list:
+            return cls.format_list(data)
+        
+        elif type(data) is tuple:
+            return tuple(cls.format_list(data))
+        
+        else:
+            raise TypeError(f'{cls.colors['red']}Tipo de dato no valido.')
+            
+
+        return super().__new__(cls)
     
-    def apply(string):
-        for key in Colors.colors:
-            string = string.replace(f'/{key}/', Colors.colors[key])
-        return string + Colors.colors['r']
 
 
-    def __init_subclass__(cls):
-        super().__init_subclass__()
-        for name, value in Colors.colors.items():
-            Colors.colors[name] = Colors.hex_to_ANSI(value)
+    @classmethod
+    def format(cls, string):
+        for name in cls.colors.keys():
+            string = string.replace(f'{{{name}}}', cls.colors[name])
+
+        return string + cls.colors['r']
 
 
-        for name, value in cls.__dict__.items():
-            if isinstance(value, str):
-                setattr(cls, name, Colors.apply(value))
+    @classmethod
+    def format_dict(cls, data):  
+        for name, value in data.items():
+            string = cls.format(value)
+            setattr(cls, name, string)
 
 
-    def hex_to_ANSI(hex_color, background=False):
+    @classmethod
+    def format_list(cls, data):
+        formatted_list = []
+        for string in data:
+            formatted_list.append(cls.format(string))
+        
+        return formatted_list
+
+
+    @classmethod
+    def process_color(cls):
+        # Convierte todos lo colores de Hexadecimal a ANSI.
+        # Crea los colores para textos y fondos.
+        for name, value in cls.colors.copy().items():
+            if name == 'r':
+                continue
+            cls.colors[name] = cls.hex_to_ANSI(value)
+            cls.colors[name + '_bg'] = cls.hex_to_ANSI(value, True)
+
+
+
+    @classmethod
+    def hex_to_ANSI(cls, hex_color, background=False):
         # Eliminar el carácter '#' si está presente en el código hexadecimal
         hex_color = hex_color.lstrip('#')
 
@@ -48,6 +100,4 @@ class Colors:
         # Determinar si se está configurando el color de fondo o de texto
         color_type = '48' if background else '38'
         ANSI_color = f"\033[{color_type};2;{r};{g};{b}m"
-        return ANSI_color    
-
-        
+        return ANSI_color

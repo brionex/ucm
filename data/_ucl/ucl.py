@@ -13,14 +13,16 @@ if N_ARGS == 3:
 file_list = os.listdir(BASE)
 
 
-# Clase que contiene las constantes utilizadas en el programa
-class CONST(Colors):
-    title = f'/cyan/\nLista de comandos del /cafe/Usuario/r/.'
-    info = f'/cyan/\nPara ver documentación de un comando./r/\n - ucl <command>\n'
-    command_doc = f'\nDocumentación del comando: /cyan/{ARG_COMMAND}\n'
-    not_doc = f'\n* No hay documentación del comando: /cyan/{ARG_COMMAND}\n'
-    args_error = f'\n*/red/ Argumentos ingresados no válidos.\n'
-    not_exist = f'\n*/red/ El comando especificado no existe.\n'
+# Objeto que contiene las constantes.
+# La clase colors procesa los strings para agregarle los colores.
+CONST = Colors({
+    'title': f'/cyan/\nLista de /red-bg/comandos del /r/cafe/Usuario/r/.',
+    'info': f'/cyan/\nPara ver documentación de un comando./r/\n - ucl <command>\n',
+    'command_doc': f'\nDocumentación del comando: /cyan/{ARG_COMMAND}\n',
+    'not_doc': f'\n* No hay documentación del comando: /cyan/{ARG_COMMAND}\n',
+    'args_error': f'\n*/red/ Argumentos ingresados no válidos.\n',
+    'not_exist': f'\n*/red/ El comando especificado no existe.\n',
+})
 
 
 # Función para mostrar la lista de comandos disponibles
@@ -54,7 +56,7 @@ def show_info():
         for line in lines:
             if line.strip().startswith(':::'):
                 doc.append(line.strip().replace(':::', ' '))
-            
+
             elif line.strip().startswith('::'):
                 doc.append(line.strip().replace('::', '*'))
 
