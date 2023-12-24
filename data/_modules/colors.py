@@ -1,55 +1,70 @@
 class Colors:
 
     colors = {
-        'r': '\033[0m',   # reset
-        'red': '#E74856',
-        'green': '#00ff00',
-        'yellow': '#ffff00',
-        'blue': '#0000ff',
-        'magenta': '#ff00ff',
-        'cyan': '#00ffff',
-        'cafe': '#6D4D27',
-        'black': '#000',
-        'white': '#fff'
+        'r': '\033[0m',
+        'black': '#000000',
+        'red': '#C51E14',
+        'green': '#1DC121',
+        'yellow': '#C7C329',
+        'blue': '#0A2FC4',
+        'magenta': '#C839C5',
+        'cyan': '#20C5C6',
+        'white': '#C7C7C7',
+        'lightBlack': '#686868',
+        'lightRed': '#FD6F6B',
+        'lightGreen': '#67F86F',
+        'lightYellow': '#FFFA72',
+        'lightBlue': '#6A76FB',
+        'lightMagenta': '#FD7CFC',
+        'lightCyan': '#68FDFE',
+        'lightWhite': '#FFFFFF',
+        'limeGreen': '#32CD32',
+        'lightCoral': '#F08080',
     }
 
+    # Cambia a False en la primera instancia.
     first_instance = True
 
 
 
     def __new__(cls, *args):
-        # Cambia los colores de hexadecimal a ANSI en la primera instancia.
+        # Transforma los colores de Hexadecimal a ANSI.
         if Colors.first_instance:
             cls.process_color()
             Colors.first_instance = False
 
+        # Usa un formateo según el tipo de dato.
         data = args[0]
-        if type(data) is str:
+        data_type = type(data)
+
+        if data_type is str:
             return cls.format(data)
         
-        elif type(data) is dict:
+        elif data_type is dict:
             cls.format_dict(data)
         
-        elif type(data) is list:
+        elif data_type is list:
             return cls.format_list(data)
         
-        elif type(data) is tuple:
+        elif data_type is tuple:
             return tuple(cls.format_list(data))
         
         else:
-            raise TypeError(f'{cls.colors['red']}Tipo de dato no valido.')
-            
+            raise TypeError(f'*{cls.colors['red']} Tipo de dato proporcionado no se puede procesar.')
 
         return super().__new__(cls)
-    
+
 
 
     @classmethod
     def format(cls, string):
+        counter = 0
         for name in cls.colors.keys():
-            string = string.replace(f'{{{name}}}', cls.colors[name])
+            if f'{{{name}}}' in string:
+                counter+=1
+                string = string.replace(f'{{{name}}}', cls.colors[name])
 
-        return string + cls.colors['r']
+        return string + cls.colors['r'] if counter else 'aa'
 
 
     @classmethod

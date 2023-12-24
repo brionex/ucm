@@ -4,7 +4,7 @@ from colors import Colors
 
 N_ARGS = len(sys.argv)
 BASE = sys.argv[1]  # Ruta donde están ubicados los scripts.
-ARG_COMMAND = None
+ARG_COMMAND = None # Se guardara el comando para obtener su doc.
 
 # Obtiene el comando del cual se va mostrar documentación.
 if N_ARGS == 3:
@@ -16,12 +16,12 @@ file_list = os.listdir(BASE)
 # Objeto que contiene las constantes.
 # La clase colors procesa los strings para agregarle los colores.
 CONST = Colors({
-    'title': f'/cyan/\nLista de /red-bg/comandos del /r/cafe/Usuario/r/.',
-    'info': f'/cyan/\nPara ver documentación de un comando./r/\n - ucl <command>\n',
-    'command_doc': f'\nDocumentación del comando: /cyan/{ARG_COMMAND}\n',
-    'not_doc': f'\n* No hay documentación del comando: /cyan/{ARG_COMMAND}\n',
-    'args_error': f'\n*/red/ Argumentos ingresados no válidos.\n',
-    'not_exist': f'\n*/red/ El comando especificado no existe.\n',
+    'title': '{lightBlue}\nLista de comandos del Usuario.',
+    'info': '{lightBlue}\nPara ver documentación de un comando.{r}\n - ucl <command>\n',
+    'command_doc': f'\nDocumentación del comando: {{lightBlue}}{ARG_COMMAND}\n',
+    'not_doc': f'\n* No hay documentación del comando: {{lightBlue}}{ARG_COMMAND}\n',
+    'args_error': '\n*{lightRed} Argumentos ingresados no válidos.\n',
+    'not_exist': '\n*{lightRed} El comando especificado no existe.\n',
 })
 
 
@@ -40,7 +40,7 @@ def show_commands():
 # Función para mostrar información sobre un comando específico
 def show_info():
     # Verifica si se proporciona un nombre de archivo y si existe en la lista de archivos
-    file_name = sys.argv[2] + '.bat'
+    file_name = ARG_COMMAND + '.bat'
     if file_name not in file_list:
         print(CONST.not_exist)
         return

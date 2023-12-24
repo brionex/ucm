@@ -1,11 +1,4 @@
-:: Documentaciion del comando - ucl
-
 :: Muestra una lista de los comandos personalizados del usuario.
-::: holasadasdas as d asd s  dsa d sa da s
-::: sadasdasds ad asd as das d asd 
-
-:: otro sms
-::: - 1lista
 
 @echo off
 
