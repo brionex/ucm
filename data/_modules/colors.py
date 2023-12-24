@@ -64,7 +64,7 @@ class Colors:
                 counter+=1
                 string = string.replace(f'{{{name}}}', cls.colors[name])
 
-        return string + cls.colors['r'] if counter else 'aa'
+        return string + (cls.colors['r'] if counter else '')
 
 
     @classmethod
