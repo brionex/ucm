@@ -18,10 +18,10 @@ file_list = os.listdir(BASE)
 CONST = Colors({
     'title': '{lightBlue}\nLista de comandos del Usuario.',
     'info': '{lightBlue}\nPara ver documentación de un comando.{r}\n - ucl <command>\n',
-    'command_doc': f'\nDocumentación del comando: {{lightBlue}}{ARG_COMMAND}\n',
-    'not_doc': f'\n* No hay documentación del comando: {{lightBlue}}{ARG_COMMAND}\n',
-    'args_error': '\n*{lightRed} Argumentos ingresados no válidos.\n',
-    'not_exist': '\n*{lightRed} El comando especificado no existe.\n',
+    'command_doc': f'\nDocumentación del comando: {{cyan}}{ARG_COMMAND}\n',
+    'not_doc': f'\n No hay documentación del comando: {{cyan}}{ARG_COMMAND}\n',
+    'args_error': '\n{lightRed} !Argumentos ingresados no válidos.\n',
+    'not_exist': '\n{lightRed} !El comando especificado no existe.\n',
 })
 
 

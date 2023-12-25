@@ -7,22 +7,22 @@
 
 @echo off
 
-set "archivo=%AppData%\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt"
+set "historyFile=%AppData%\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt"
 
 if "%~1" == "-show" (
     echo.
-    type "%archivo%"
+    type "%historyFile%"
     echo.
     exit /b
 )
 
-if exist "%archivo%" (
-    del "%archivo%"
+if exist "%historyFile%" (
+    del "%historyFile%"
     echo.
-    echo * El archivo fue eliminado exitosamente.
+    echo * Se ha borrado todo el historial.
     echo.
 ) else (
     echo.
-    echo * El archivo no existe.
+    echo * No existe historial de la consola.
     echo.
 )
