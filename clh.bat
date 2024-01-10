@@ -19,10 +19,10 @@ if "%~1" == "-show" (
 if exist "%historyFile%" (
     del "%historyFile%"
     echo.
-    echo * Se ha borrado todo el historial.
+    echo Se ha borrado todo el historial.
     echo.
 ) else (
     echo.
-    echo * No existe historial de la consola.
+    echo No existe historial de la consola.
     echo.
 )
