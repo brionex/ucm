@@ -2,7 +2,7 @@
 
 @echo off
 
-set "venv=%base%data\_venv\Scripts\python.exe"
+set "venv=%base%\data\_venv\Scripts\python.exe"
 
 
-%venv% "a.py"
+%venv% "..\a.py"
