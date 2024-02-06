@@ -1,9 +1,11 @@
 {
   "cSpell.words": [
     "Briones",
+    "cmdr",
     "endev",
     "jajajaja",
-    "Quijije"
+    "Quijije",
+    "venvpy"
   ],
   "python.analysis.extraPaths": [
     "./data/_modules"
