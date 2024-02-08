@@ -20,14 +20,12 @@ c4 = c.apply((
 ))
 
 
-print(c1.ucmd)
-print(c2)
+print(c1)
+print(c2.ucmd)
 print(c3[0])
 print(c4[0])
 print(c.list_colors())
 
 
 # print(c.list_colors())
-
-
 # print(c.ucmd)

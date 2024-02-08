@@ -27,13 +27,15 @@ class Colors:
         self._process_colors()
 
 
+
+    # Convierte todos lo colores de Hexadecimal a ANSI.
+    # Crea los colores para textos y fondos.
     def _process_colors(self):
-        # Convierte todos lo colores de Hexadecimal a ANSI.
-        # Crea los colores para textos y fondos.
         for name, value in self._colors.copy().items():
             if name != 'r':
                 self._colors[name] = self.hex_to_ansi(value)
                 self._colors[name + '_bg'] = self.hex_to_ansi(value, True)
+
 
 
     def hex_to_ansi(self, hex_color, background=False):
@@ -58,68 +60,50 @@ class Colors:
         return ansi_color
 
 
-    def apply(self, strings):
-        print(strings)
 
-    # def __new__(cls, *args):
-
-    #     if len(args) > 1:
-    #         cls._colors.update(args[0])
-
-    #     print(cls._colors)
-
-        # Transforma los colores de Hexadecimal a ANSI.
-        # cls.process_color()
-
+    def apply(self, data):
         # Usa un formateo según el tipo de dato.
-        # data = args[0]
-        # data_type = type(data)
+        data_type = type(data)
 
-        # if data_type is str:
-        #     return cls.format(data)
+        if data_type is str:
+            return self.format_str(data)
 
-        # elif data_type is dict:
-        #     cls.format_dict(data)
+        if data_type is dict:
+            self.format_dict(data)
+            return
 
-        # elif data_type is list:
-        #     return cls.format_list(data)
+        if data_type is list:
+            return self.format_list(data)
 
-        # elif data_type is tuple:
-        #     return tuple(cls.format_list(data))
+        if data_type is tuple:
+            return tuple(self.format_list(data))
 
-        # else:
-        #     raise TypeError(
-        #         f'*{cls.colors['red']} Tipo de dato proporcionado no se puede procesar.')
-
-        # return super().__new__(cls)
+        return f'*{self._colors['red']} Tipo de dato proporcionado no se puede procesar.'
 
 
 
-    # @classmethod
-    # def format(cls, string):
-    #     counter = 0
-    #     for name in cls.colors.keys():
-    #         if f'{{{name}}}' in string:
-    #             counter += 1
-    #             string = string.replace(f'{{{name}}}', cls.colors[name])
+    def format_str(self, string):
+        counter = 0
+        for name in self._colors.items():
+            if f'{{{name}}}' in string:
+                counter += 1
+                string = string.replace(f'{{{name}}}', self._colors[name])
 
-    #     return string + (cls.colors['r'] if counter else '')
-
-
-    # @classmethod
-    # def format_dict(cls, data):
-    #     for name, value in data.items():
-    #         string = cls.format(value)
-    #         setattr(cls, name, string)
+        return string + (self.colors['r'] if counter else '')
 
 
-    # @classmethod
-    # def format_list(cls, data):
-    #     formatted_list = []
-    #     for string in data:
-    #         formatted_list.append(cls.format(string))
 
-    #     return formatted_list
+    def format_dict(cls, data):
+        for name, value in data.items():
+            string = cls.format(value)
+            setattr(cls, name, string)
 
 
-    
+
+    def format_list(cls, data):
+        formatted_list = []
+        for string in data:
+            formatted_list.append(cls.format(string))
+
+        return formatted_list
+
