@@ -6,6 +6,7 @@ Script: cmdr
 import sys
 import os
 from lib import validate_folder_name
+import colors
 
 BASE_PATH = os.path.abspath(os.path.join(__file__, '../../..'))
 
@@ -19,6 +20,7 @@ def generate_bat_script(name):
   '''
 
 
+  cadena = f"hola {C.red} mundo"
 
 
 
