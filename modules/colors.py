@@ -1,24 +1,17 @@
 class Colors:
     _colors = {
         'r': '\033[0m',
-        'black': '#000000',
-        'red': '#C51E14',
-        'green': '#1DC121',
-        'yellow': '#C7C329',
-        'blue': '#0A2FC4',
-        'magenta': '#C839C5',
+        'red': '#FD6F6B',
         'cyan': '#20C5C6',
-        'white': '#C7C7C7',
-        'light_black': '#686868',
-        'light_red': '#FD6F6B',
-        'light_green': '#67F86F',
-        'light_yellow': '#FFFA72',
-        'light_blue': '#6A76FB',
-        'light_magenta': '#FD7CFC',
-        'light_cyan': '#68FDFE',
-        'light_white': '#FFFFFF',
-        'lime_green': '#32CD32',
-        'light_coral': '#F08080',
+        'gray': '#686868',
+        'blue': '#6A76FB',
+        'lime': '#67F86F',
+        'white': '#FFFFFF',
+        'coral': '#F08080',
+        'black': '#000000',
+        'green': '#1DC121',
+        'yellow': '#FFFA72',
+        'magenta': '#FD7CFC',
     }
 
 
@@ -33,12 +26,12 @@ class Colors:
     def _process_colors(self):
         for name, value in self._colors.copy().items():
             if name != 'r':
-                self._colors[name] = self.hex_to_ansi(value)
-                self._colors[name + '_bg'] = self.hex_to_ansi(value, True)
+                self._colors[name] = self._hex_to_ansi(value)
+                self._colors[name + '_bg'] = self._hex_to_ansi(value, True)
 
 
 
-    def hex_to_ansi(self, hex_color, background=False):
+    def _hex_to_ansi(self, hex_color, background=False):
         # Eliminar el carácter '#' si está presente en el código hexadecimal.
         hex_color = hex_color.lstrip('#')
 
@@ -61,49 +54,56 @@ class Colors:
 
 
 
+    # Aplica el formateo dependiendo del tipo de dato proporcionado.
     def apply(self, data):
-        # Usa un formateo según el tipo de dato.
         data_type = type(data)
 
         if data_type is str:
-            return self.format_str(data)
+            return self._format_str(data)
 
         if data_type is dict:
-            self.format_dict(data)
-            return
+            return self._format_dict(data)
 
         if data_type is list:
-            return self.format_list(data)
+            return self._format_list(data)
 
         if data_type is tuple:
-            return tuple(self.format_list(data))
+            return tuple(self._format_list(data))
 
-        return f'*{self._colors['red']} Tipo de dato proporcionado no se puede procesar.'
-
-
-
-    def format_str(self, string):
-        counter = 0
-        for name in self._colors.items():
-            if f'{{{name}}}' in string:
-                counter += 1
-                string = string.replace(f'{{{name}}}', self._colors[name])
-
-        return string + (self.colors['r'] if counter else '')
+        print(f'*{self._colors['red']} Tipo de dato proporcionado no se puede procesar.')
+        return None
 
 
 
-    def format_dict(cls, data):
-        for name, value in data.items():
-            string = cls.format(value)
-            setattr(cls, name, string)
+    def _format_str(self, string):
+        for name, value in self._colors.items():
+            if name in string:
+                string = string.replace(f'{name}::', value)
+        return string + (self._colors['r'])
 
 
 
-    def format_list(cls, data):
+    def _format_dict(self, data):
+        formatted_dict = {
+            name: self._format_str(value) for name, value in data.items()
+        }
+        new_class = type('newClass', (object,), formatted_dict)
+        return new_class
+
+
+
+    def _format_list(self, data):
         formatted_list = []
         for string in data:
-            formatted_list.append(cls.format(string))
-
+            formatted_list.append(self._format_str(string))
         return formatted_list
 
+
+
+    def list_colors(self):
+        print('\n')
+        for name, value in self._colors.items():
+            if not 'bg' in name:
+                print(value + name)
+            print(self._colors['r'],  end="")
+        print('\n')
