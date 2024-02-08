@@ -1,9 +1,33 @@
-import os
-from dotenv import load_dotenv
-import a
+from modules.colors import Colors
 
-load_dotenv()
+c = Colors({
+    'red': '#fff'
+})
 
-var = os.getenv('RUTA')
+c1 = c.apply('1 cyan::ucmd - Crea, lista y elimina comandos.')
 
-print(var)
+c2 = c.apply({
+    'ucmd': '2 cyan::ucmd - Crea, lista y elimina comandos.'
+})
+
+c3 = c.apply([
+    '3 cyan::ucmd - Crea, lista y elimina comandos.'
+])
+
+c4 = c.apply((
+    '4 cyan::ucmd - Crea, lista y elimina comandos.',
+    '4 cyan::ucmd - Crea, lista y elimina comandos.',
+))
+
+
+print(c1.ucmd)
+print(c2)
+print(c3[0])
+print(c4[0])
+print(c.list_colors())
+
+
+# print(c.list_colors())
+
+
+# print(c.ucmd)

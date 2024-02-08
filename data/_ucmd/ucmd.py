@@ -1,55 +1,52 @@
-'''
-Script: cmdr
-
-'''
-
-import sys
 import os
-from lib import validate_folder_name
-import colors
-
-BASE_PATH = os.path.abspath(os.path.join(__file__, '../../..'))
+import click
+from modules.Colors import Colors
 
 
+BASE_PATH = os.environ['BASE']
 
-def generate_bat_script(name):
-  content = r'''@echo off
-  set "dirname=%~dp0"
-  set "venvpy=%dirname%..\data\_venv\Scripts\python.exe"
-  %venvpy% "%dirname%..\data\_cmdr\cmdr.py" %*
-  '''
+c = Colors()
+c.set_colors({
+    'red': '#ffffff'
+})
+c.apply({
+    'ucmd': '.cyan.ucmd.r - Crea, lista y elimina comandos.'
+})
 
-
-  cadena = f"hola {C.red} mundo"
-
-
-
-def main():
-  args = sys.argv[1:]
-
-  # file_path = os.path.join(base_path, 'bin', f'{args[1]}.bat')
-  if len(args) == 0:
-    print('0000')
-    return
-
-
-  if args[0] == 'new' and validate_folder_name(args[1]):
-    print('hola')
-    
-    # if os.path.exists(file_path):
-    #   print('Archivo ya existe')
-    # else:
-    #   with open(file_path, 'w', encoding='utf-8') as file:
-    #     file.write(SCRIPT)
-
-
-
-if __name__ == "__main__":
-  main()
+print(c.list_colors)
 
 
 
 
+@click.group(help=Const.ucmd)
+def ucmd():
+    """Comando principal."""
+
+
+@ucmd.command()
+def comando1():
+    """Descripción del comando 1."""
+    click.echo('Ejecutando comando 1')
+
+
+@ucmd.command()
+def comando2():
+    """Descripción del comando 2."""
+    click.echo('Ejecutando comando 2')
+
+
+@ucmd.command()
+def comando3():
+    """Descripción del comando 3."""
+    click.echo('Ejecutando comando 3')
+
+
+if __name__ == '__main__':
+    ucmd()
+
+
+#   with open(file_path, 'w', encoding='utf-8') as file:
+#     file.write(SCRIPT)
 
 
 # # Especifica la ruta del archivo .bat que deseas crear

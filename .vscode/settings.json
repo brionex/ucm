@@ -1,11 +1,13 @@
 {
   "cSpell.words": [
+    "ansi",
     "Briones",
     "cmdr",
     "dotenv",
     "endev",
     "jajajaja",
     "Quijije",
+    "ucmd",
     "venvpy"
   ],
   "python.analysis.extraPaths": [
