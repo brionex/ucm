@@ -1,24 +1,19 @@
 import os
 import click
-from modules.Colors import Colors
+from colors import Colors
 
 
 BASE_PATH = os.environ['BASE']
 
-c = Colors()
-c.set_colors({
-    'red': '#ffffff'
-})
-c.apply({
-    'ucmd': '.cyan.ucmd.r - Crea, lista y elimina comandos.'
+colors = Colors()
+const = colors.apply({
+    'main': 'cyan::ucmd - Crea, lista y elimina comandos.'
 })
 
-print(c.list_colors)
 
 
 
-
-@click.group(help=Const.ucmd)
+@click.group(help=const.main)
 def ucmd():
     """Comando principal."""
 

@@ -11,6 +11,7 @@
     "venvpy"
   ],
   "python.analysis.extraPaths": [
-    "./data/_modules"
+    "./data/_modules",
+    "./modules"
   ]
 }

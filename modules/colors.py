@@ -15,10 +15,10 @@ class Colors:
     }
 
 
-    def __init__(self, config):
-        self._colors.update(config)
+    def __init__(self, config=None):
+        if config:
+            self._colors.update(config)
         self._process_colors()
-
 
 
     # Convierte todos lo colores de Hexadecimal a ANSI.
@@ -79,6 +79,7 @@ class Colors:
         for name, value in self._colors.items():
             if name in string:
                 string = string.replace(f'{name}::', value)
+                print(string)
         return string + (self._colors['r'])
 
 
@@ -103,7 +104,7 @@ class Colors:
     def list_colors(self):
         print('\n')
         for name, value in self._colors.items():
-            if not 'bg' in name:
+            if not '_bg' in name:
                 print(value + name)
             print(self._colors['r'],  end="")
         print('\n')
