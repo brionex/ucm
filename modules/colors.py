@@ -1,3 +1,18 @@
+"""
+DEMO
+
+# Crear una instancia.
+color = Colors()
+
+# Con un string
+color.apply('hola', print=true)
+
+#
+
+"""
+
+
+
 class Colors:
     _colors = {
         'r': '\033[0m',
@@ -79,7 +94,7 @@ class Colors:
         for name, value in self._colors.items():
             if name in string:
                 string = string.replace(f'{name}::', value)
-                print(string)
+                print('96:' + string)
         return string + (self._colors['r'])
 
 

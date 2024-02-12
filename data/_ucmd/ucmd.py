@@ -6,6 +6,9 @@ from colors import Colors
 BASE_PATH = os.environ['BASE']
 
 colors = Colors()
+
+print(colors.apply('red::hola'))
+
 const = colors.apply({
     'main': 'cyan::ucmd - Crea, lista y elimina comandos.'
 })
