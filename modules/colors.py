@@ -5,12 +5,12 @@ DEMO
 color = Colors()
 
 # Con un string
-color.apply('hola', print=true)
+color.apply('red::Hola mundo', pr=True)
 
 #
 
 """
-
+import click
 
 
 class Colors:
@@ -60,7 +60,7 @@ class Colors:
             g = int(hex_color[2:4], 16)
             b = int(hex_color[4:6], 16)
         else:
-            raise ValueError("El código de color debe tener 3 o 6 dígitos")
+            raise ValueError("El código de color debe ser hexadecimal y tener 3 o 6 dígitos")
 
         # Determinar si se está configurando el color de fondo o de texto.
         color_type = '48' if background else '38'
@@ -70,31 +70,32 @@ class Colors:
 
 
     # Aplica el formateo dependiendo del tipo de dato proporcionado.
-    def apply(self, data):
-        data_type = type(data)
+    def apply(self, data, pr=False):
 
-        if data_type is str:
-            return self._format_str(data)
+        result = None
 
-        if data_type is dict:
-            return self._format_dict(data)
+        if isinstance(data, str):
+            result = self._format_str(data)
+        elif isinstance(data, dict):
+            result = self._format_dict(data)
+        elif isinstance(data, list):
+            result = self._format_list(data)
+        elif isinstance(data, tuple):
+            result = tuple(self._format_list(data))
+        else:
+            print(f'*{self._colors['red']} Tipo de dato proporcionado no se puede procesar.')
 
-        if data_type is list:
-            return self._format_list(data)
+        if pr:
+            print(result)
 
-        if data_type is tuple:
-            return tuple(self._format_list(data))
-
-        print(f'*{self._colors['red']} Tipo de dato proporcionado no se puede procesar.')
-        return None
+        return result
 
 
 
     def _format_str(self, string):
         for name, value in self._colors.items():
             if name in string:
-                string = string.replace(f'{name}::', value)
-                print('96:' + string)
+                string = string.replace(f'{name}::', click.style('', fg=value))
         return string + (self._colors['r'])
 
 
