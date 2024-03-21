@@ -1,0 +1,17 @@
+{
+  "cSpell.words": [
+    "ansi",
+    "Briones",
+    "cmdr",
+    "dotenv",
+    "endev",
+    "jajajaja",
+    "newcmd",
+    "Quijije",
+    "ucmd",
+    "venvpy"
+  ],
+  "python.analysis.extraPaths": [
+    "./modules"
+  ]
+}
