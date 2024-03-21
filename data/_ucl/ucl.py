@@ -5,31 +5,32 @@ from colorama import Fore
 BASE_PATH = os.environ['BASE_PATH']
 
 
-@click.group(short_help=f'{Fore.CYAN}Crea, elimina y lista los comandos.{Fore.RESET}')
+@click.command()
 def ucl():
-    click.echo('hola mundo')
+    print('comando')
+    pass
 
 
-@ucl.command(help='Lista los comandos del usuario.')
-def ls():
-    files_list = os.listdir(os.path.join(BASE_PATH, 'bin'))
-    print()
-    for file in files_list:
-        name, extension = os.path.splitext(file)
-        print(name)
-    print()
+# @ucl.command(help='Lista los comandos del usuario.')
+# def ls():
+#     files_list = os.listdir(os.path.join(BASE_PATH, 'bin'))
+#     print()
+#     for file in files_list:
+#         name, extension = os.path.splitext(file)
+#         print(name)
+#     print()
 
 
-@ucl.command()
-def comando2():
-    """Descripción del comando 2."""
-    click.echo('Ejecutando comando 2')
+# @ucl.command()
+# def comando2():
+#     """Descripción del comando 2."""
+#     click.echo('Ejecutando comando 2')
 
 
-@ucl.command()
-def comando3():
-    """Descripción del comando 3."""
-    click.echo('Ejecutando comando 3')
+# @ucl.command()
+# def comando3():
+#     """Descripción del comando 3."""
+#     click.echo('Ejecutando comando 3')
 
 
 if __name__ == '__main__':
