@@ -1,3 +1,3 @@
 # python shell
 
-[ir a doc](./doc/a.md)
+[ir a doc](./doc/doc.html)
