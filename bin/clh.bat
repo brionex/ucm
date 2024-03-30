@@ -1,9 +1,4 @@
-@REM Documentacion.
-
-:: Borra el historial de comandos ingresados en la consola.
-:: Es necesario reiniciar la consola para notar el cambio.
-:: ( clh -show ) - Muestra todo el historial de comandos.
-
+:: Documentacion
 
 @echo off
 

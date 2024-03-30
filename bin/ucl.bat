@@ -1,3 +1,5 @@
+:: Documentacion
+
 @echo off
 set "dirname=%~dp0"
 set "venvpy=%dirname%..\.venv\Scripts\python.exe"
