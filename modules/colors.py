@@ -10,8 +10,6 @@ color.apply('red::Hola mundo', pr=True)
 #
 
 """
-import click
-
 
 class Colors:
     _colors = {

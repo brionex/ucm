@@ -1,1 +1,1 @@
-# python shell
+# Custom Command Manager (CCM)
