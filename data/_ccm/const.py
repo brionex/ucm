@@ -6,6 +6,7 @@ class CONST:
     add_op = 'Agrega una descripción al comando'
 
     cmd_exist = '\n  !Ya existe un comando con ese nombre\n'
+    invalid_name = '\n  !Nombre para el comando no permitido\n  * Solo letras en minúsculas\n'
     py_content = r'print("\n  Ejecución del archivo {0}.py\n")'
     cmd_created = '\n  Comando "{0}" creado con éxito.\n'
     confirm_remove = '  Confirmar eliminar comando "{0}" (s): '

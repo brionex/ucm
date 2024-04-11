@@ -1,6 +1,9 @@
 {
   "cSpell.words": [
     "ccmpath",
-    "ucmd"
+    "PYTHONPATH",
+    "ucmd",
+    "venv",
+    "venvpy"
   ]
 }

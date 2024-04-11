@@ -4,4 +4,4 @@
 set "dirname=%~dp0"
 set "venvpy=%dirname%..\.venv\Scripts\python.exe"
 set PYTHONPATH=%dirname%\modules;%PYTHONPATH%
-%venvpy% "%dirname%..\user\{1}\{1}.py" %*
+%venvpy% "%dirname%..\data\{1}\{1}.py" %*
