@@ -2,12 +2,8 @@ import os
 import shutil
 from pathlib import Path
 import click
-from ccm.const import CONST
-
-
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
-BIN_DIR = os.path.join(BASE_DIR, 'bin')
-USER_DIR = os.path.join(BASE_DIR, 'user')
+from const import CONST
+from modules import ccmpath
 
 
 @click.group(help=CONST.ucmd)
@@ -17,7 +13,7 @@ def ucmd():
 
 @ucmd.command(help=CONST.ls)
 def ls():
-    cmds_list = os.listdir(BIN_DIR)
+    cmds_list = os.listdir(ccmpath.BIN_DIR)
     max_len = len(max(cmds_list, key=len)) - 4
 
     print()
@@ -28,7 +24,7 @@ def ls():
             continue
 
         # Lee el archivo bat para obtener la descripción del comando
-        with open(os.path.join(BIN_DIR, file_name), "r", encoding="utf-8") as f:
+        with open(os.path.join(ccmpath.BIN_DIR, file_name), "r", encoding="utf-8") as f:
             line = f.readline()
 
         print(f'  {name.ljust(max_len, ' ')} {line.replace('::', '')}', end='')
@@ -40,10 +36,10 @@ def ls():
 @click.option('-m', '--message', required=True, help=CONST.add_op)
 def add(name, message):
     # Crea la carpeta para los comandos del usuario
-    os.makedirs(USER_DIR, exist_ok=True)
+    os.makedirs(ccmpath.DATA_DIR, exist_ok=True)
 
-    bat_file = os.path.join(BIN_DIR, f'{name}.bat')
-    py_file = os.path.join(USER_DIR, name, f'{name}.py')
+    bat_file = os.path.join(ccmpath.BIN_DIR, f'{name}.bat')
+    py_file = os.path.join(ccmpath.DATA_DIR, name, f'{name}.py')
 
     # Verifica si ya existe el comando que se quiere crear
     if os.path.exists(bat_file):
@@ -58,7 +54,7 @@ def add(name, message):
         f.write(lines)
 
     # Crea la carpeta y el archivo python principal
-    os.makedirs(os.path.join(USER_DIR, name), exist_ok=True)
+    os.makedirs(os.path.join(ccmpath.DATA_DIR, name), exist_ok=True)
     with open(py_file, 'w', encoding="utf-8") as f:
         f.write(CONST.py_content.format(name))
     print(CONST.cmd_created.format(name))
@@ -67,13 +63,13 @@ def add(name, message):
 @ucmd.command(help=CONST.remove)
 @click.argument('name')
 def remove(name):
-    bat_file = os.path.join(BIN_DIR, f'{name}.bat')
-    data_folder = os.path.join(USER_DIR, name)
+    bat_file = os.path.join(ccmpath.BIN_DIR, f'{name}.bat')
+    data_folder = os.path.join(ccmpath.DATA_DIR, name)
 
     if not (os.path.exists(bat_file) and os.path.exists(data_folder)):
         print(CONST.cmd_not_exist)
         return
-    
+
     res = input(CONST.confirm_remove.format(name))
     if res.lower() == 's':
         os.remove(bat_file)
