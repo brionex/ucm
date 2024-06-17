@@ -1,7 +1,5 @@
-:: {0}
-
 @echo off
-set "dirname=%~dp0"
-set "venvpy=%dirname%..\.venv\Scripts\python.exe"
-set PYTHONPATH=%dirname%\modules;%PYTHONPATH%
-%venvpy% "%dirname%..\data\{1}\{1}.py" %*
+set "dirname=%~dp0.."
+set "venvpy=%dirname%\.venv\Scripts\python.exe"
+set PYTHONPATH="%dirname%\modules";%PYTHONPATH%
+%venvpy% "%dirname%\data\{0}\{0}.py" %*
