@@ -3,7 +3,7 @@ import dataclasses
 @dataclasses.dataclass
 class CONST:
     ccm = 'Gestiona los comandos creados por el usuario'
-    list = 'Lista todos los comandos creados'
+    ls = 'Lista todos los comandos creados'
     add = 'Crea los archivos para un nuevo comando'
     remove = 'Elimina un comando creado por el usuario'
     modify = 'Modifica el nombre o la descripción de un comando'

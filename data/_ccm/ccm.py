@@ -1,10 +1,8 @@
 import os
-import sys
 import shutil
-from pathlib import Path
 import click
 from const import CONST
-from func import *
+from func import get_cmds_doc, get_cmds_list, set_cmd_doc, remove_cmd_doc
 from modules import env, lib
 
 
@@ -13,8 +11,8 @@ def ccm():
     pass
 
 
-@ccm.command(help=CONST.list)
-def list():
+@ccm.command(help=CONST.ls)
+def ls():
     cmd_list = get_cmds_doc()
     max_name = max(len(item['name']) for item in cmd_list)
 
@@ -27,7 +25,8 @@ def list():
 
 @ccm.command(help=CONST.add)
 @click.argument('name')
-@click.option('-d', '--description', required=True, help=CONST.add_op)
+@click.argument('description')
+# @click.option('-d', '--description', required=True, help=CONST.add_op)
 def add(name, description):
     bat_file = os.path.join(env.BIN_DIR, f'{name}.bat')
     py_file = os.path.join(env.DATA_DIR, name, f'{name}.py')
@@ -112,5 +111,7 @@ def remove(name):
 #         print('Descripción modificada')
 #     if name:
 #         print('Nombre modificado')
+
+
 if __name__ == "__main__":
     ccm()
