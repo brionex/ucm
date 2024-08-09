@@ -1,2 +1,0 @@
-// Elimina la cache en python (__pycache__)
-Get-ChildItem -Recurse -Directory -Filter "__pycache__" | Remove-Item -Recurse -Force
