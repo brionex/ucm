@@ -1,12 +1,23 @@
 {
   "cSpell.words": [
-    "ccmpath",
+    "asincrónica",
+    "cacls",
+    "chkdsk",
+    "cmdkey",
+    "cmds",
+    "cscript",
+    "diskpart",
+    "endlocal",
+    "ERRORLEVEL",
+    "findstr",
+    "fsutil",
     "PYTHONPATH",
-    "ucmd",
+    "schtasks",
+    "secho",
+    "setlocal",
+    "taskkill",
     "venv",
-    "venvpy"
-  ],
-  "python.analysis.extraPaths": [
-    "./modules"
+    "venvpy",
+    "xcopy"
   ]
 }
