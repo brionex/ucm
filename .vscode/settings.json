@@ -15,6 +15,7 @@
     "pycache",
     "PYTHONPATH",
     "redup",
+    "rpycache",
     "schtasks",
     "secho",
     "setlocal",
