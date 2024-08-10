@@ -12,6 +12,7 @@
     "findstr",
     "fsutil",
     "PYTHONPATH",
+    "redup",
     "schtasks",
     "secho",
     "setlocal",
