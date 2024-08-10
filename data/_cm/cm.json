@@ -72,7 +72,6 @@
     "xcopy"
   ],
   "cmds": {
-    "cm": "Gestiona los comandos creados por el usuario",
-    "prueba": null
+    "cm": "Gestiona los comandos creados por el usuario"
   }
 }
