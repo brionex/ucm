@@ -1,3 +1,5 @@
+from pathlib import Path
+import subprocess
 import click
 import utils
 from Texts import Text
@@ -18,11 +20,11 @@ def ls():
     cmd_list = json_data['cmds']
     max_name = max(len(name) for name in cmd_list)
 
-    print(Text.ls_title)
+    click.echo(Text.ls_title)
     for cmd, desc in cmd_list.items():
         name = cmd.ljust(max_name + 2)
-        print(f'  {click.style(name, fg="cyan")} {desc}')
-    print()
+        click.echo(f'  {click.style(name, fg="cyan")} {desc}')
+    click.echo()
 
 
 @cli.command()
@@ -62,20 +64,20 @@ def add(name, description):
 
 
 @cli.command()
-@click.argument('name')
-def remove(name):
+@click.argument('command')
+def remove(command):
     """Elimina un comando creado por el usuario"""
-    if name == 'cli':
+    if command == 'cm':
         click.secho(Text.remove_invalid, fg='yellow')
         return
 
-    if name not in json_data['cmds']:
+    if command not in json_data['cmds']:
         click.secho(Text.remove_not_exist, fg='yellow')
         return
 
-    res = input(Text.remove_confirm.format(name))
+    res = input(Text.remove_confirm.format(command))
     if res.lower() == 'y':
-        utils.remove_command(name, json_data)
+        utils.remove_command(command, json_data)
         click.secho(Text.remove_removed, fg='green')
     else:
         click.secho(Text.remove_cancel, fg='yellow')
@@ -87,7 +89,7 @@ def remove(name):
 @click.option('-d', '--description', help=Text.modify_desc)
 def modify(command, name, description):
     """Modifica el nombre o la descripción de un comando"""
-    if command == 'cli':
+    if command == 'cm':
         click.secho(Text.modify_invalid, fg='yellow')
         return
 
@@ -110,6 +112,30 @@ def modify(command, name, description):
 
     utils.modify_command(command, name, description, json_data)
     click.secho(Text.modify_modified, fg='green')
+
+
+@cli.command(name='open')
+@click.argument('command')
+def open_command(command):
+    """Abre el directorio de un comando en vscode"""
+    if command == 'cm':
+        click.secho(Text.open_invalid, fg='yellow')
+        return
+
+    if command not in json_data['cmds']:
+        click.secho(Text.open_not_exist, fg='yellow')
+        return
+
+    folder_path = Path(utils.env.DATA_DIR) / command
+
+    if folder_path.exists():
+        try:
+            subprocess.run(['code', str(folder_path)], check=True, shell=True)
+            click.echo(Text.open_success.format(command))
+        except subprocess.CalledProcessError as e:
+            click.secho(Text.open_error.format(e), fg='yellow')
+        except FileNotFoundError:
+            click.secho(Text.open_not_vscode, fg='yellow')
 
 
 if __name__ == '__main__':

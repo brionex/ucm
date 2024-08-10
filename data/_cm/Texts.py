@@ -24,6 +24,12 @@ class Text:
     modify_not_option = '\n!Debes especificar una opción para modificar\n'
     modify_not_exist = '\n!El comando que deseas modificar no existe\n'
 
+    open_invalid = '\n!No puedes editar los archivos de este comando\n'
+    open_not_exist = '\n!No existe el comando que deseas abrir\n'
+    open_error = "\nError al intentar abrir la carpeta en VS Code: {0}\n"
+    open_not_vscode = "\nEl comando 'code' no se encontró\n"
+    open_success = '\nDirectorio de comando "{0}" se abrió en vscode\n'
+
     cmd_exist = '\n!Ya existe un comando con ese nombre en el sistema\n'
     invalid_name = '\n!Nombre de comando no válido\n  * Solo letras minúsculas\n  * Longitud mínima: 2 caracteres\n'
     py_content = 'print("Ejecución del archivo {0}.py")\n'
