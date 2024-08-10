@@ -7,14 +7,14 @@ from modules import lib
 json_data = utils.load_json()
 
 
-@click.group(help=Text.cm)
-def cm():
-    pass
+@click.group()
+def cli():
+    """Gestiona los comandos creados por el usuario"""
 
 
-@cm.command(name='list', help=Text.ls)
+@cli.command(name='list')
 def ls():
-    """Muestra una lista de comandos con sus descripciones"""
+    """Lista todos los comandos creados por el usuario"""
     cmd_list = json_data['cmds']
     max_name = max(len(name) for name in cmd_list)
 
@@ -25,10 +25,10 @@ def ls():
     print()
 
 
-@cm.command(help=Text.check)
+@cli.command()
 @click.argument('name')
 def check(name):
-    """Verifica si un comando existe en el sistema"""
+    """Verifica si un comando ya existe en el sistema"""
     if not lib.validate_lowercase(name) or len(name) < 2:
         click.secho(Text.invalid_name, fg="yellow")
         return
@@ -39,11 +39,11 @@ def check(name):
         click.secho(Text.check_not_exist.format(name), fg='yellow')
 
 
-@cm.command(help=Text.add)
+@cli.command()
 @click.argument('name')
 @click.option('-d', '--description', help=Text.add_option)
 def add(name, description):
-    """Añade un nuevo comando"""
+    """Crea los archivos para un nuevo comando"""
     if not lib.validate_lowercase(name) or len(name) < 2:
         click.secho(Text.invalid_name, fg="yellow")
         return
@@ -61,11 +61,11 @@ def add(name, description):
     click.secho(Text.add_created.format(name), fg='green')
 
 
-@cm.command(help=Text.remove)
+@cli.command()
 @click.argument('name')
 def remove(name):
     """Elimina un comando creado por el usuario"""
-    if name == 'cm':
+    if name == 'cli':
         click.secho(Text.remove_invalid, fg='yellow')
         return
 
@@ -81,13 +81,13 @@ def remove(name):
         click.secho(Text.remove_cancel, fg='yellow')
 
 
-@cm.command(help=Text.modify)
+@cli.command()
 @click.argument('command')
 @click.option('-n', '--name', help=Text.modify_name)
 @click.option('-d', '--description', help=Text.modify_desc)
 def modify(command, name, description):
     """Modifica el nombre o la descripción de un comando"""
-    if command == 'cm':
+    if command == 'cli':
         click.secho(Text.modify_invalid, fg='yellow')
         return
 
@@ -113,4 +113,4 @@ def modify(command, name, description):
 
 
 if __name__ == '__main__':
-    cm()
+    cli()
