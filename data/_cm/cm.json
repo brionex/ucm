@@ -74,6 +74,7 @@
   "cmds": {
     "cm": "Gestiona los comandos creados por el usuario",
     "clh": "Gestiona el historial de consola",
-    "rpycache": "Elimina los directorios de cache de python"
+    "rpycache": "Elimina los directorios de cache de python",
+    "cloudflared": "crea un túnel seguro desde tu servidor local a Cloudflare"
   }
 }
