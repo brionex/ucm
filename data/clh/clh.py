@@ -50,9 +50,9 @@ def remove(line_number):
     if 0 <= line_number < len(history):
         del history[line_number]
         write_history(history)
-        click.echo(f'Línea {line_number} eliminada del historial.')
+        click.echo(f'\nLínea {line_number} eliminada del historial.\n')
     else:
-        click.echo('Número de línea fuera de rango.')
+        click.echo('\nNúmero de línea fuera de rango.\n')
 
 
 @cli.command()
@@ -60,9 +60,9 @@ def clear():
     """Elimina todo el historial."""
     if os.path.exists(history_file):
         os.remove(history_file)
-        click.echo('Se ha borrado todo el historial.')
+        click.echo('\nSe ha borrado todo el historial.\n')
     else:
-        click.echo('No existe historial de la consola.')
+        click.echo('\nNo existe historial de la consola.\n')
 
 
 @cli.command()
@@ -72,7 +72,7 @@ def add(lines):
     with open(history_file, 'a', encoding='utf-8') as file:
         for line in lines:
             file.write(line + '\n')
-    click.echo('Nuevos elementos agregados al historial.')
+    click.echo('\nNuevos elementos agregados al historial.\n')
 
 
 @cli.command()
@@ -81,9 +81,9 @@ def redup():
     history = read_history()
     if history:
         write_history(list(set(history)))
-        click.echo('Se han eliminado las líneas duplicadas del historial.')
+        click.echo('\nSe han eliminado las líneas duplicadas del historial.\n')
     else:
-        click.echo('No hay historial para procesar.')
+        click.echo('\nNo hay historial para procesar.\n')
 
 
 if __name__ == '__main__':
