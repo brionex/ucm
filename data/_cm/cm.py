@@ -11,7 +11,7 @@ json_data = utils.load_json()
 
 @click.group()
 def cli():
-    """Gestiona los comandos creados por el usuario"""
+    """Administra los comandos personalizados del usuario"""
 
 
 @cli.command(name='list')
