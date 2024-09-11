@@ -1,5 +1,5 @@
 {
-  "cmd_template": "@echo off\nsetlocal\nset \"dirname=%~dp0..\"\nset \"venvpy=%dirname%\\.venv\\Scripts\\python.exe\"\nset PYTHONPATH=%dirname%;%PYTHONPATH%\n\"%venvpy%\" \"%dirname%\\data\\{0}\\{0}.py\" %*\nIF %ERRORLEVEL% NEQ 0 EXIT /b %ERRORLEVEL%\nendlocal",
+  "cmd_template": "@echo off\nsetlocal\nset \"dirname=%~dp0..\"\nset \"venvpy=%dirname%\\{0}\"\nset PYTHONPATH=%dirname%;%PYTHONPATH%\n\"%venvpy%\" \"%dirname%\\data\\{1}\\{1}.py\" %*\nIF %ERRORLEVEL% NEQ 0 EXIT /b %ERRORLEVEL%\nendlocal",
   "cmds_reserved": [
     "cd",
     "cls",
@@ -187,8 +187,5 @@
     "wjb",
     "write"
   ],
-  "cmds": {
-    "cm": "Administra los comandos personalizados del usuario",
-    "comando": null
-  }
+  "cmds": {}
 }
